@@ -36,28 +36,47 @@ enum HealthDataUnit {
 
 /// List of all available data types.
 enum HealthDataType {
-  BODY_FAT_PERCENTAGE,
-  HEIGHT,
-  WEIGHT,
-  BODY_MASS_INDEX,
-  WAIST_CIRCUMFERENCE,
-  STEPS,
-  BASAL_ENERGY_BURNED,
-  ACTIVE_ENERGY_BURNED,
-  HEART_RATE,
-  BODY_TEMPERATURE,
-  BLOOD_PRESSURE_SYSTOLIC,
-  BLOOD_PRESSURE_DIASTOLIC,
-  RESTING_HEART_RATE,
-  WALKING_HEART_RATE,
-  BLOOD_OXYGEN,
-  BLOOD_GLUCOSE,
-  ELECTRODERMAL_ACTIVITY,
 
-  // Heart Rate events (specific to Apple Watch)
-  HIGH_HEART_RATE_EVENT,
-  LOW_HEART_RATE_EVENT,
-  IRREGULAR_HEART_RATE_EVENT
+  // Body Measurements
+  HEIGHT, // .height (iOS 8.0+)
+  WEIGHT, // .bodyMass (iOS 8.0+)
+  BODY_MASS_INDEX, // .bodyMassIndex (iOS 8.0+)
+  BODY_FAT_PERCENTAGE, // .bodyFatPercentage (iOS 8.0+)
+  WAIST_CIRCUMFERENCE, // .waistCircumference (iOS 11.0+)
+  
+  // Activity
+  STEPS, // .stepCount (iOS 8.0+)
+  BASAL_ENERGY_BURNED, // .basalEnergyBurned (iOS 8.0+)
+  ACTIVE_ENERGY_BURNED, // .activeEnergyBurned (iOS 8.0+)
+  BODY_TEMPERATURE, // .bodyTemperature (iOS 8.0+)
+
+  // Blood
+  BLOOD_PRESSURE_SYSTOLIC, // .bloodPressureSystolic (iOS 8.0+)
+  BLOOD_PRESSURE_DIASTOLIC, // .bloodPressureDiastolic (iOS 8.0+)
+  BLOOD_OXYGEN, // .oxygenSaturation (iOS 8.0+)
+  BLOOD_GLUCOSE, // .bloodGlucose (iOS 8.0+)
+  // BLOOD_PRESSURE, // .bloodPressure (iOS 8.0+)
+  BLOOD_ALCOHOL,// .bloodAlcoholContent (iOS 8.0+)
+
+  // Respiratory
+  RESPIRATORY_RATE, // .respiratoryRate (iOS 8.0+)
+  VO2MAX, // .vo2Max (iOS 11.0+)
+  
+  // Heart Rate
+  HEART_RATE, // .heartRate (iOS 8.0+)
+  RESTING_HEART_RATE, // .restingHeartRate (iOS 11.0+)
+  WALKING_HEART_RATE, // .walkingHeartRateAverage (iOS 11.0+)
+  HIGH_HEART_RATE_EVENT, // .highHeartRateEvent (iOS 12.2+)
+  LOW_HEART_RATE_EVENT, // .lowHeartRateEvent (iOS 12.2+)
+  IRREGULAR_HEART_RATE_EVENT, // .irregularHeartRhythmEvent (iOS 12.2+)
+  HRV_SDNN_HEART_RATE_EVENT, // .heartRateVariabilitySDNN (iOS 11.0+)
+
+  // Hearing
+  // ENV_AUDIO_EXPOSURE, // .environmentalAudioExposure (iOS 13.0+)
+  // HEADPHONE_AUDIO_EXPOSURE, // .headphoneAudioExposure (iOS 13.0+)
+
+  // Lab and Test Results
+  ELECTRODERMAL_ACTIVITY, // .electrodermalActivity (iOS 8.0+)
 }
 
 /// Map a [HealthDataType] to a [HealthDataUnit].
@@ -83,31 +102,49 @@ const Map<HealthDataType, HealthDataUnit> _dataTypeToUnit = {
   /// Heart Rate events (specific to Apple Watch)
   HealthDataType.HIGH_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT,
   HealthDataType.LOW_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT,
-  HealthDataType.IRREGULAR_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT
+  HealthDataType.IRREGULAR_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT,
+  
+  // New Additions (specific to Apple Watch)
+  HealthDataType.HRV_SDNN_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT,
 };
 
 /// List of data types available on iOS
 const List<HealthDataType> _dataTypesIOS = [
-  HealthDataType.BODY_FAT_PERCENTAGE,
+
+  // Body Measurements
   HealthDataType.HEIGHT,
   HealthDataType.WEIGHT,
   HealthDataType.BODY_MASS_INDEX,
+  HealthDataType.BODY_FAT_PERCENTAGE,
   HealthDataType.WAIST_CIRCUMFERENCE,
+  // Activity
   HealthDataType.STEPS,
   HealthDataType.BASAL_ENERGY_BURNED,
   HealthDataType.ACTIVE_ENERGY_BURNED,
-  HealthDataType.HEART_RATE,
   HealthDataType.BODY_TEMPERATURE,
+  // Blood
   HealthDataType.BLOOD_PRESSURE_SYSTOLIC,
   HealthDataType.BLOOD_PRESSURE_DIASTOLIC,
-  HealthDataType.RESTING_HEART_RATE,
-  HealthDataType.WALKING_HEART_RATE,
   HealthDataType.BLOOD_OXYGEN,
   HealthDataType.BLOOD_GLUCOSE,
-  HealthDataType.ELECTRODERMAL_ACTIVITY,
+  // HealthDataType.BLOOD_PRESSURE,
+  HealthDataType.BLOOD_ALCOHOL,
+  // Respiratory
+  HealthDataType.RESPIRATORY_RATE,
+  HealthDataType.VO2MAX,
+  // Heart Rates
+  HealthDataType.HEART_RATE,
+  HealthDataType.RESTING_HEART_RATE,
+  HealthDataType.WALKING_HEART_RATE,
   HealthDataType.HIGH_HEART_RATE_EVENT,
   HealthDataType.LOW_HEART_RATE_EVENT,
-  HealthDataType.IRREGULAR_HEART_RATE_EVENT
+  HealthDataType.IRREGULAR_HEART_RATE_EVENT,
+  HealthDataType.HRV_SDNN_HEART_RATE_EVENT,
+  // Hearing
+  // HealthDataType.ENV_AUDIO_EXPOSURE,
+  // HealthDataType.HEADPHONE_AUDIO_EXPOSURE,
+  // Lab and Test Results
+  HealthDataType.ELECTRODERMAL_ACTIVITY,
 ];
 
 /// List of data types available on Android
@@ -137,8 +174,7 @@ class HealthDataPoint {
   String dataType;
   String platform;
 
-  HealthDataPoint(this.value, this.unit, this.dateFrom, this.dateTo,
-      this.dataType, this.platform);
+  HealthDataPoint(this.value, this.unit, this.dateFrom, this.dateTo, this.dataType, this.platform);
 
   HealthDataPoint.fromJson(Map<String, dynamic> json) {
     try {
@@ -178,49 +214,35 @@ class HealthDataPoint {
 class Health {
   static const MethodChannel _channel = const MethodChannel('flutter_health');
 
-  static PlatformType _platformType =
-      Platform.isAndroid ? PlatformType.ANDROID : PlatformType.IOS;
+  static PlatformType _platformType = Platform.isAndroid ? PlatformType.ANDROID : PlatformType.IOS;
 
   /// Check if a given data type is available on the platform
   static bool isDataTypeAvailable(HealthDataType dataType) =>
-      _platformType == PlatformType.ANDROID
-          ? _dataTypesAndroid.contains(dataType)
-          : _dataTypesIOS.contains(dataType);
+      _platformType == PlatformType.ANDROID ? _dataTypesAndroid.contains(dataType) : _dataTypesIOS.contains(dataType);
 
   // Request access to GoogleFit/Apple HealthKit
   static Future<bool> requestAuthorization() async {
-    final bool isAuthorized =
-        await _channel.invokeMethod('requestAuthorization');
+    final bool isAuthorized = await _channel.invokeMethod('requestAuthorization');
     return isAuthorized;
   }
 
   // Calculate the BMI using the last observed height and weight values.
-  static Future<List<HealthDataPoint>> _androidBodyMassIndex(
-      DateTime startDate, DateTime endDate) async {
-    List<HealthDataPoint> heights =
-        await getHealthDataFromType(startDate, endDate, HealthDataType.HEIGHT);
-    List<HealthDataPoint> weights =
-        await getHealthDataFromType(startDate, endDate, HealthDataType.WEIGHT);
+  static Future<List<HealthDataPoint>> _androidBodyMassIndex(DateTime startDate, DateTime endDate) async {
+    List<HealthDataPoint> heights = await getHealthDataFromType(startDate, endDate, HealthDataType.HEIGHT);
+    List<HealthDataPoint> weights = await getHealthDataFromType(startDate, endDate, HealthDataType.WEIGHT);
 
-    num bmiValue =
-        weights.last.value / (heights.last.value * heights.last.value);
+    num bmiValue = weights.last.value / (heights.last.value * heights.last.value);
 
     HealthDataType dataType = HealthDataType.BODY_MASS_INDEX;
     HealthDataUnit unit = _dataTypeToUnit[dataType];
 
-    HealthDataPoint bmi = HealthDataPoint(
-        bmiValue,
-        enumToString(unit),
-        startDate.millisecond,
-        endDate.millisecond,
-        enumToString(dataType),
-        PlatformType.ANDROID.toString());
+    HealthDataPoint bmi = HealthDataPoint(bmiValue, enumToString(unit), startDate.millisecond, endDate.millisecond,
+        enumToString(dataType), PlatformType.ANDROID.toString());
 
     return [bmi];
   }
 
-  static HealthDataPoint processDataPoint(
-      var dataPoint, HealthDataType dataType, HealthDataUnit unit) {
+  static HealthDataPoint processDataPoint(var dataPoint, HealthDataType dataType, HealthDataUnit unit) {
     // Set the platform_type and data_type fields
     dataPoint["platform_type"] = _platformType.toString();
 
@@ -243,8 +265,7 @@ class Health {
     }
 
     // If BodyMassIndex is requested on Android, calculate this manually in Dart
-    else if (dataType == HealthDataType.BODY_MASS_INDEX &&
-        _platformType == PlatformType.ANDROID) {
+    else if (dataType == HealthDataType.BODY_MASS_INDEX && _platformType == PlatformType.ANDROID) {
       return _androidBodyMassIndex(startDate, endDate);
     }
 
