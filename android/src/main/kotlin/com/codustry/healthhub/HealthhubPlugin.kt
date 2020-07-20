@@ -1,4 +1,4 @@
-package codustry.plugins.healthhub
+package com.codustry.healthhub
 
 import android.app.Activity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -23,7 +23,7 @@ import com.google.android.gms.fitness.data.*
 
 const val GOOGLE_FIT_PERMISSIONS_REQUEST_CODE = 1111
 
-class HealthPlugin(val activity: Activity, val channel: MethodChannel) : MethodCallHandler, ActivityResultListener, Result {
+class HealthhubPlugin(val activity: Activity, val channel: MethodChannel) : MethodCallHandler, ActivityResultListener, Result {
 
     private var result: Result? = null
     private var handler: Handler? = null
@@ -53,8 +53,8 @@ class HealthPlugin(val activity: Activity, val channel: MethodChannel) : MethodC
     companion object {
         @JvmStatic
         fun registerWith(registrar: Registrar) {
-            val channel = MethodChannel(registrar.messenger(), "flutter_health")
-            val plugin = HealthPlugin(registrar.activity(), channel)
+            val channel = MethodChannel(registrar.messenger(), "healthhub")
+            val plugin = HealthhubPlugin(registrar.activity(), channel)
             registrar.addActivityResultListener(plugin)
             channel.setMethodCallHandler(plugin)
         }
