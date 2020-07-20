@@ -1,5 +1,5 @@
 #import "HealthhubPlugin.h"
-#if __has_include(<heathhub/heathhub-Swift.h>)
+#if __has_include(<healthhub/healthhub-Swift.h>)
 #import <healthhub/healthhub-Swift.h>
 #else
 // Support project import fallback if the generated compatibility header
