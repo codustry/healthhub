@@ -2,7 +2,7 @@ import Flutter
 import UIKit
 import HealthKit
 
-public class SwiftHealthPlugin: NSObject, FlutterPlugin {
+public class SwiftHealthhubPlugin: NSObject, FlutterPlugin {
     
     let healthStore = HKHealthStore()
     var healthDataTypes = [HKSampleType]()
@@ -46,8 +46,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
     let ELECTRODERMAL_ACTIVITY = "ELECTRODERMAL_ACTIVITY"
 
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "flutter_health", binaryMessenger: registrar.messenger())
-        let instance = SwiftHealthPlugin()
+        let channel = FlutterMethodChannel(name: "healthhub", binaryMessenger: registrar.messenger())
+        let instance = SwiftHealthhubPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
 

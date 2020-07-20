@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:health/health.dart';
+import 'package:healthhub/healthhub.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,13 +26,13 @@ class _MyAppState extends State<MyApp> {
     DateTime endDate = DateTime.now();
 
     Future.delayed(Duration(seconds: 2), () async {
-      _isAuthorized = await Health.requestAuthorization();
+      _isAuthorized = await Healthhub.requestAuthorization();
 
       if (_isAuthorized) {
         print('Authorized');
 
         bool weightAvailable =
-            Health.isDataTypeAvailable(HealthDataType.HRV_SDNN_HEART_RATE_EVENT);
+            Healthhub.isDataTypeAvailable(HealthDataType.HRV_SDNN_HEART_RATE_EVENT);
         print("is WEIGHT data type available?: $weightAvailable");
 
         /// Specify the wished data types
@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
           /// must be wrapped in a try catch block.b
           try {
             List<HealthDataPoint> healthData =
-                await Health.getHealthDataFromType(startDate, endDate, type);
+                await Healthhub.getHealthDataFromType(startDate, endDate, type);
             _healthDataList.addAll(healthData);
           } catch (exception) {
             print(exception.toString());

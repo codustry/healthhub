@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:health/health.dart';
+import 'package:healthhub/healthhub.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('health');
@@ -16,6 +16,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(Health.isDataTypeAvailable(HealthDataType.WEIGHT), true);
+    expect(Healthhub.isDataTypeAvailable(HealthDataType.WEIGHT), true);
   });
 }
