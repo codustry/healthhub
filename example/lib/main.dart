@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:hestia/hestia.dart';
+import 'package:health/health.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
-    DateTime startDate = DateTime.utc(2001, 01, 01);
+    DateTime startDate = DateTime.utc(2020, 06, 01);
     DateTime endDate = DateTime.now();
 
     Future.delayed(Duration(seconds: 2), () async {
@@ -32,25 +32,32 @@ class _MyAppState extends State<MyApp> {
         print('Authorized');
 
         bool weightAvailable =
-            Health.isDataTypeAvailable(HealthDataType.WEIGHT);
+            Health.isDataTypeAvailable(HealthDataType.HRV_SDNN_HEART_RATE_EVENT);
         print("is WEIGHT data type available?: $weightAvailable");
 
         /// Specify the wished data types
         List<HealthDataType> types = [
-          HealthDataType.WEIGHT,
-          HealthDataType.HEIGHT,
-          HealthDataType.STEPS,
-          HealthDataType.BODY_MASS_INDEX,
-          HealthDataType.WAIST_CIRCUMFERENCE,
-          HealthDataType.BODY_FAT_PERCENTAGE,
-          HealthDataType.ACTIVE_ENERGY_BURNED,
-          HealthDataType.BASAL_ENERGY_BURNED,
+//          HealthDataType.WEIGHT,
+//          HealthDataType.HEIGHT,
+//          HealthDataType.STEPS,
+//          HealthDataType.BODY_MASS_INDEX,
+//          HealthDataType.WAIST_CIRCUMFERENCE,
+//          HealthDataType.BODY_FAT_PERCENTAGE,
+//          HealthDataType.ACTIVE_ENERGY_BURNED,
+//          HealthDataType.BASAL_ENERGY_BURNED,
+//          HealthDataType.HEART_RATE,
+//          HealthDataType.BLOOD_PRESSURE_SYSTOLIC,
+//          HealthDataType.BLOOD_PRESSURE_DIASTOLIC,
+//          HealthDataType.RESTING_HEART_RATE,
+//          HealthDataType.BLOOD_GLUCOSE,
+//          HealthDataType.BLOOD_OXYGEN,
           HealthDataType.HEART_RATE,
-          HealthDataType.BLOOD_PRESSURE_SYSTOLIC,
-          HealthDataType.BLOOD_PRESSURE_DIASTOLIC,
           HealthDataType.RESTING_HEART_RATE,
-          HealthDataType.BLOOD_GLUCOSE,
-          HealthDataType.BLOOD_OXYGEN,
+          HealthDataType.WALKING_HEART_RATE,
+          HealthDataType.HIGH_HEART_RATE_EVENT,
+          HealthDataType.LOW_HEART_RATE_EVENT,
+          HealthDataType.IRREGULAR_HEART_RATE_EVENT,
+          HealthDataType.HRV_SDNN_HEART_RATE_EVENT,
         ];
 
         for (HealthDataType type in types) {

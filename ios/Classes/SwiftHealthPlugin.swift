@@ -147,7 +147,7 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
     }
 
     func initializeTypes() {
-        
+
         // Body Measurements
         unitDict[HEIGHT] = HKUnit.meter()
         unitDict[WEIGHT] = HKUnit.gramUnit(with: .kilo)
@@ -177,7 +177,7 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
         unitDict[HEART_RATE] = HKUnit.init(from: "count/min")
         unitDict[RESTING_HEART_RATE] = HKUnit.init(from: "count/min")
         unitDict[WALKING_HEART_RATE] = HKUnit.init(from: "count/min")
-        unitDict[HRV_SDNN_HEART_RATE_EVENT] = HKUnit.secondUnit(from: .milli)
+        unitDict[HRV_SDNN_HEART_RATE_EVENT] = HKUnit.secondUnit(with: .milli)
         // + 3 more (HIGH_HEART_RATE_EVENT, LOW_HEART_RATE_EVENT, IRREGULAR_HEART_RATE_EVENT)
         
         // Hearing
@@ -189,32 +189,25 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
 
         // Set up iOS 11 specific types (ordinary health data types)
         if #available(iOS 11.0, *) { 
-            // Body Measurements
-            dataTypesDict[HEIGHT] = HKSampleType.quantityType(forIdentifier: .height)!
-            dataTypesDict[WEIGHT] = HKSampleType.quantityType(forIdentifier: .bodyMass)!
-            dataTypesDict[BODY_MASS_INDEX] = HKSampleType.quantityType(forIdentifier: .bodyMassIndex)!
             dataTypesDict[BODY_FAT_PERCENTAGE] = HKSampleType.quantityType(forIdentifier: .bodyFatPercentage)!
+            dataTypesDict[HEIGHT] = HKSampleType.quantityType(forIdentifier: .height)!
+            dataTypesDict[BODY_MASS_INDEX] = HKSampleType.quantityType(forIdentifier: .bodyMassIndex)!
             dataTypesDict[WAIST_CIRCUMFERENCE] = HKSampleType.quantityType(forIdentifier: .waistCircumference)!
-            // Activity
             dataTypesDict[STEPS] = HKSampleType.quantityType(forIdentifier: .stepCount)!
             dataTypesDict[BASAL_ENERGY_BURNED] = HKSampleType.quantityType(forIdentifier: .basalEnergyBurned)!
             dataTypesDict[ACTIVE_ENERGY_BURNED] = HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)!
+            dataTypesDict[HEART_RATE] = HKSampleType.quantityType(forIdentifier: .heartRate)!
             dataTypesDict[BODY_TEMPERATURE] = HKSampleType.quantityType(forIdentifier: .bodyTemperature)!
-            // Blood
             dataTypesDict[BLOOD_PRESSURE_SYSTOLIC] = HKSampleType.quantityType(forIdentifier: .bloodPressureSystolic)!
             dataTypesDict[BLOOD_PRESSURE_DIASTOLIC] = HKSampleType.quantityType(forIdentifier: .bloodPressureDiastolic)!
-            dataTypesDict[BLOOD_OXYGEN] = HKSampleType.quantityType(forIdentifier: .oxygenSaturation)!
-            dataTypesDict[BLOOD_GLUCOSE] = HKSampleType.quantityType(forIdentifier: .bloodGlucose)!
-            // dataTypesDict[BLOOD_PRESSURE] = HKSampleType.quantityType(forIdentifier: .bloodPressure)!
-            dataTypesDict[BLOOD_ALCOHOL] = HKSampleType.quantityType(forIdentifier: .bloodAlcoholContent)!
-            // Heart Rates + 3 more (HIGH_HEART_RATE_EVENT, LOW_HEART_RATE_EVENT, IRREGULAR_HEART_RATE_EVENT)
-            dataTypesDict[HEART_RATE] = HKSampleType.quantityType(forIdentifier: .heartRate)!
             dataTypesDict[RESTING_HEART_RATE] = HKSampleType.quantityType(forIdentifier: .restingHeartRate)!
             dataTypesDict[WALKING_HEART_RATE] = HKSampleType.quantityType(forIdentifier: .walkingHeartRateAverage)!
-            dataTypesDict[HRV_SDNN_HEART_RATE_EVENT] = HKSampleType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!
-            // Lab and Test Results
+            dataTypesDict[BLOOD_OXYGEN] = HKSampleType.quantityType(forIdentifier: .oxygenSaturation)!
+            dataTypesDict[BLOOD_GLUCOSE] = HKSampleType.quantityType(forIdentifier: .bloodGlucose)!
             dataTypesDict[ELECTRODERMAL_ACTIVITY] = HKSampleType.quantityType(forIdentifier: .electrodermalActivity)!
+            dataTypesDict[WEIGHT] = HKSampleType.quantityType(forIdentifier: .bodyMass)!
             
+            dataTypesDict[HRV_SDNN_HEART_RATE_EVENT] = HKSampleType.quantityType(forIdentifier: .heartRateVariabilitySDNN)!
 
             healthDataTypes = Array(dataTypesDict.values)
         }
@@ -231,22 +224,8 @@ public class SwiftHealthPlugin: NSObject, FlutterPlugin {
                 ])
         }
 
-        // Set up iOS 13.0 specific types
-        // if #available(iOS 13.0, *){
-
-        //     // Hearing
-        //     dataTypesDict[ENV_AUDIO_EXPOSURE] = HKSampleType.quantityType(forIdentifier: .environmentalAudioExposure)!
-        //     dataTypesDict[HEADPHONE_AUDIO_EXPOSURE] = HKSampleType.quantityType(forIdentifier: .headphoneAudioExposure)!
-
-        //     hearingEventTypes =  Set([
-        //         HKSampleType.categoryType(forIdentifier: .environmentalAudioExposure)!,
-        //         HKSampleType.categoryType(forIdentifier: .headphoneAudioExposure)!,
-        //         ])
-        // }
-
         // Concatenate heart events and health data types (both may be empty)
         allDataTypes = Set(heartRateEventTypes + healthDataTypes)
-        // allDataTypes = Set(heartRateEventTypes + healthDataTypes + hearingEventTypes)
     }
     
 }
