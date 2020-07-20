@@ -4,7 +4,7 @@ A forked flutter plugin "health" from [cph-cachet/flutter-plugins](https://githu
 Supports **iOS** and **Android X**
 
 ## Data Types
-| HealthHub Data Type          | [HealthKit Data Types](https://developer.apple.com/documentation/healthkit/data_types) | Available on Android | Comments             |
+| HealthHub Data Type          | [iOS HealthKit](https://developer.apple.com/documentation/healthkit/data_types) | Available on Android | Comments             |
 |------------------------------|----------------------------|----------------------|----------------------|
 | `HEIGHT`                     | .height                    | yes                  |                      |
 | `WEIGHT`                     | .bodyMass                  | yes                  |                      |
