@@ -1,4 +1,4 @@
 #import <Flutter/Flutter.h>
 
-@interface HeathhubPlugin : NSObject<FlutterPlugin>
+@interface HealthhubPlugin : NSObject<FlutterPlugin>
 @end
