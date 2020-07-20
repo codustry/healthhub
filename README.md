@@ -1,5 +1,5 @@
-# Hestia
-This library combines both GoogleFit and AppleHealthKit. It support most of the values provided.
+# Hestia of Healthwork
+This library combines both GoogleFit and AppleHealthKit. It support most of the values provided. Written for Flutter (Dart).
 A copy health plugin in from cph-cachet/flutter-plugins
 Supports **iOS** and **Android X**
 
