@@ -1,6 +1,6 @@
-# HealthHub of Healthwork
-This library combines both GoogleFit and AppleHealthKit. It support most of the values provided. Written for Flutter (Dart).
-A copy health plugin in from cph-cachet/flutter-plugins
+# HealthHub
+A forked flutter plugin "health" from [cph-cachet/flutter-plugins](https://github.com/cph-cachet/flutter-plugins). HealthHub library meant to be a core health aggregator for Healthwork, capturing data from iOS and Android devices. Written in Dart language meant to be use with Flutter.
+
 Supports **iOS** and **Android X**
 
 ## Data Types
