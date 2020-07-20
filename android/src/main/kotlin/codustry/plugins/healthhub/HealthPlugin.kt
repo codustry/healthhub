@@ -1,4 +1,4 @@
-package cachet.plugins.health
+package codustry.plugins.healthhub
 
 import android.app.Activity
 import com.google.android.gms.auth.api.signin.GoogleSignIn

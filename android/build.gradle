@@ -1,4 +1,4 @@
-group 'cachet.plugins.health'
+group 'codustry.plugins.healthhub'
 version '1.2'
 
 buildscript {

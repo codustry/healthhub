@@ -211,7 +211,7 @@ class HealthDataPoint {
 }
 
 /// Main class for the Plugin
-class Health {
+class Healthhub {
   static const MethodChannel _channel = const MethodChannel('flutter_health');
 
   static PlatformType _platformType = Platform.isAndroid ? PlatformType.ANDROID : PlatformType.IOS;
