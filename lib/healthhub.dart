@@ -146,10 +146,10 @@ const List<HealthDataType> _dataTypesIOS = [
   HealthDataType.HEART_RATE,
   HealthDataType.RESTING_HEART_RATE,
   HealthDataType.WALKING_HEART_RATE,
-  HealthDataType.HRV_SDNN_HEART_RATE_EVENT,
   HealthDataType.HIGH_HEART_RATE_EVENT,
   HealthDataType.LOW_HEART_RATE_EVENT,
   HealthDataType.IRREGULAR_HEART_RATE_EVENT,
+  HealthDataType.HRV_SDNN_HEART_RATE_EVENT,
   // Hearing
   // HealthDataType.ENV_AUDIO_EXPOSURE,
   // HealthDataType.HEADPHONE_AUDIO_EXPOSURE,
