@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:health/health.dart';
+import 'package:hestia/hestia.dart';
 
 void main() => runApp(MyApp());
 
