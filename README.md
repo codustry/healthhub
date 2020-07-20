@@ -4,28 +4,30 @@ A copy health plugin in from cph-cachet/flutter-plugins
 Supports **iOS** and **Android X**
 
 ## Data Types
-| Data Type                    | Available on iOS | Available on Android | Comments             |
-|------------------------------|------------------|----------------------|----------------------|
-| `BODY_FAT`                   | yes              | yes                  |                      |
-| `HEIGHT`                     | yes              | yes                  |                      |
-| `WEIGHT`                     | yes              | yes                  |                      |
-| `BODY_MASS_INDEX`            | yes              | yes                  |                      |
-| `WAIST_CIRCUMFERENCE`        | yes              |                      |                      |
-| `STEPS`                      | yes              | yes                  |                      |
-| `BASAL_ENERGY_BURNED`        | yes              |                      |                      |
-| `ACTIVE_ENERGY_BURNED`       | yes              | yes                  |                      |
-| `HEART_RATE`                 | yes              | yes                  |                      |
-| `BODY_TEMPERATURE`           | yes              | yes                  |                      |
-| `BLOOD_PRESSURE_SYSTOLIC`    | yes              | yes                  |                      |
-| `BLOOD_PRESSURE_DIASTOLIC`   | yes              | yes                  |                      |
-| `RESTING_HEART_RATE`         | yes              |                      |                      |
-| `WALKING_HEART_RATE`         | yes              |                      |                      |
-| `BLOOD_OXYGEN`               | yes              | yes                  |                      |
-| `BLOOD_GLUCOSE`              | yes              | yes                  |                      |
-| `ELECTRODERMAL_ACTIVITY`     | yes              |                      | Requires Apple Watch |
-| `HIGH_HEART_RATE_EVENT`      | yes              |                      | Requires Apple Watch |
-| `LOW_HEART_RATE_EVENT`       | yes              |                      | Requires Apple Watch |
-| `IRREGULAR_HEART_RATE_EVENT` | yes              |                      | Requires Apple Watch |
+| HealthHub Data Type          | iOS Equavalent             | Available on Android | Comments             |
+|------------------------------|----------------------------|----------------------|----------------------|
+| `HEIGHT`                     | .height                    | yes                  |                      |
+| `WEIGHT`                     | .bodyMass                  | yes                  |                      |
+| `BODY_MASS_INDEX`            | .bodyMassIndex             | yes                  |                      |
+| `BODY_FAT_PERCENTAGE`        | .bodyFatPercentage         | yes                  |                      |
+| `WAIST_CIRCUMFERENCE`        | .waistCircumference        |                      |                      |
+| `STEPS`                      | .stepCount                 | yes                  |                      |
+| `BASAL_ENERGY_BURNED`        | .basalEnergyBurned         |                      |                      |
+| `ACTIVE_ENERGY_BURNED`       | .activeEnergyBurned        | yes                  |                      |
+| `BODY_TEMPERATURE`           | .bodyTemperature           | yes                  |                      |
+| `BLOOD_PRESSURE_SYSTOLIC`    | .bloodPressureSystolic     | yes                  |                      |
+| `BLOOD_PRESSURE_DIASTOLIC`   | .bloodPressureDiastolic    | yes                  |                      |
+| `BLOOD_OXYGEN`               | .oxygenSaturation          | yes                  |                      |
+| `BLOOD_GLUCOSE`              | .bloodGlucose              | yes                  |                      |
+| `BLOOD_ALCOHOL`              | .bloodAlcoholContent       |
+| `HEART_RATE`                 | .heartRate                 | yes                  |                      |
+| `RESTING_HEART_RATE`         | .restingHeartRate          |                      |                      |
+| `WALKING_HEART_RATE`         | .walkingHeartRateAverage   |                      |                      |
+| `HIGH_HEART_RATE_EVENT`      | .highHeartRateEvent        |                      | Requires Apple Watch |
+| `LOW_HEART_RATE_EVENT`       | .lowHeartRateEvent         |                      | Requires Apple Watch |
+| `IRREGULAR_HEART_RATE_EVENT` | .irregularHeartRhythmEvent |                      | Requires Apple Watch |
+| `HRV_SDNN_HEART_RATE_EVENT`  | .heartRateVariabilitySDNN  |                      | Requires Apple Watch |
+| `ELECTRODERMAL_ACTIVITY`     | .electrodermalActivity     |                      | Requires Apple Watch |
 
 ## Setup
 ### Apple HealthKit (iOS)
