@@ -26,6 +26,7 @@ enum HealthDataUnit {
   METERS,
   COUNT,
   BEATS_PER_MINUTE,
+  MILLISECONDS,
   CALORIES,
   DEGREE_CELSIUS,
   NO_UNIT,
@@ -36,78 +37,124 @@ enum HealthDataUnit {
 
 /// List of all available data types.
 enum HealthDataType {
-  BODY_FAT_PERCENTAGE,
-  HEIGHT,
-  WEIGHT,
-  BODY_MASS_INDEX,
-  WAIST_CIRCUMFERENCE,
-  STEPS,
-  BASAL_ENERGY_BURNED,
-  ACTIVE_ENERGY_BURNED,
-  HEART_RATE,
-  BODY_TEMPERATURE,
-  BLOOD_PRESSURE_SYSTOLIC,
-  BLOOD_PRESSURE_DIASTOLIC,
-  RESTING_HEART_RATE,
-  WALKING_HEART_RATE,
-  BLOOD_OXYGEN,
-  BLOOD_GLUCOSE,
-  ELECTRODERMAL_ACTIVITY,
 
-  // Heart Rate events (specific to Apple Watch)
-  HIGH_HEART_RATE_EVENT,
-  LOW_HEART_RATE_EVENT,
-  IRREGULAR_HEART_RATE_EVENT
+  // Body Measurements
+  HEIGHT, // .height (iOS 8.0+)
+  WEIGHT, // .bodyMass (iOS 8.0+)
+  BODY_MASS_INDEX, // .bodyMassIndex (iOS 8.0+)
+  BODY_FAT_PERCENTAGE, // .bodyFatPercentage (iOS 8.0+)
+  WAIST_CIRCUMFERENCE, // .waistCircumference (iOS 11.0+)
+  
+  // Activity
+  STEPS, // .stepCount (iOS 8.0+)
+  BASAL_ENERGY_BURNED, // .basalEnergyBurned (iOS 8.0+)
+  ACTIVE_ENERGY_BURNED, // .activeEnergyBurned (iOS 8.0+)
+  BODY_TEMPERATURE, // .bodyTemperature (iOS 8.0+)
+
+  // Blood
+  BLOOD_PRESSURE_SYSTOLIC, // .bloodPressureSystolic (iOS 8.0+)
+  BLOOD_PRESSURE_DIASTOLIC, // .bloodPressureDiastolic (iOS 8.0+)
+  BLOOD_OXYGEN, // .oxygenSaturation (iOS 8.0+)
+  BLOOD_GLUCOSE, // .bloodGlucose (iOS 8.0+)
+  // BLOOD_PRESSURE, // .bloodPressure (iOS 8.0+)
+  BLOOD_ALCOHOL,// .bloodAlcoholContent (iOS 8.0+)
+
+  // Respiratory
+  RESPIRATORY_RATE, // .respiratoryRate (iOS 8.0+)
+  VO2MAX, // .vo2Max (iOS 11.0+)
+  
+  // Heart Rate
+  HEART_RATE, // .heartRate (iOS 8.0+)
+  RESTING_HEART_RATE, // .restingHeartRate (iOS 11.0+)
+  WALKING_HEART_RATE, // .walkingHeartRateAverage (iOS 11.0+)
+  HIGH_HEART_RATE_EVENT, // .highHeartRateEvent (iOS 12.2+)
+  LOW_HEART_RATE_EVENT, // .lowHeartRateEvent (iOS 12.2+)
+  IRREGULAR_HEART_RATE_EVENT, // .irregularHeartRhythmEvent (iOS 12.2+)
+  HRV_SDNN_HEART_RATE_EVENT, // .heartRateVariabilitySDNN (iOS 11.0+)
+
+  // Hearing
+  // ENV_AUDIO_EXPOSURE, // .environmentalAudioExposure (iOS 13.0+)
+  // HEADPHONE_AUDIO_EXPOSURE, // .headphoneAudioExposure (iOS 13.0+)
+
+  // Lab and Test Results
+  ELECTRODERMAL_ACTIVITY, // .electrodermalActivity (iOS 8.0+)
+
 }
 
 /// Map a [HealthDataType] to a [HealthDataUnit].
 const Map<HealthDataType, HealthDataUnit> _dataTypeToUnit = {
-  HealthDataType.BODY_FAT_PERCENTAGE: HealthDataUnit.PERCENTAGE,
+  // Body Measurements
   HealthDataType.HEIGHT: HealthDataUnit.METERS,
   HealthDataType.WEIGHT: HealthDataUnit.KILOGRAMS,
   HealthDataType.BODY_MASS_INDEX: HealthDataUnit.NO_UNIT,
+  HealthDataType.BODY_FAT_PERCENTAGE: HealthDataUnit.PERCENTAGE,
   HealthDataType.WAIST_CIRCUMFERENCE: HealthDataUnit.METERS,
+  // Activity
   HealthDataType.STEPS: HealthDataUnit.COUNT,
   HealthDataType.BASAL_ENERGY_BURNED: HealthDataUnit.CALORIES,
   HealthDataType.ACTIVE_ENERGY_BURNED: HealthDataUnit.CALORIES,
-  HealthDataType.HEART_RATE: HealthDataUnit.BEATS_PER_MINUTE,
   HealthDataType.BODY_TEMPERATURE: HealthDataUnit.DEGREE_CELSIUS,
+  // Blood
   HealthDataType.BLOOD_PRESSURE_SYSTOLIC: HealthDataUnit.MILLIMETER_OF_MERCURY,
   HealthDataType.BLOOD_PRESSURE_DIASTOLIC: HealthDataUnit.MILLIMETER_OF_MERCURY,
-  HealthDataType.RESTING_HEART_RATE: HealthDataUnit.BEATS_PER_MINUTE,
-  HealthDataType.WALKING_HEART_RATE: HealthDataUnit.BEATS_PER_MINUTE,
   HealthDataType.BLOOD_OXYGEN: HealthDataUnit.PERCENTAGE,
   HealthDataType.BLOOD_GLUCOSE: HealthDataUnit.MILLIGRAM_PER_DECILITER,
-  HealthDataType.ELECTRODERMAL_ACTIVITY: HealthDataUnit.SIEMENS,
-
-  /// Heart Rate events (specific to Apple Watch)
+  // HealthDataType.BLOOD_PRESSURE: HealthDataUnit.NO_UNIT,
+  HealthDataType.BLOOD_ALCOHOL: HealthDataUnit.NO_UNIT,
+  // Respiratory
+  HealthDataType.RESPIRATORY_RATE: HealthDataUnit.NO_UNIT,
+  HealthDataType.VO2MAX: HealthDataUnit.NO_UNIT,
+  // Heart Rates
+  HealthDataType.HEART_RATE: HealthDataUnit.BEATS_PER_MINUTE,
+  HealthDataType.RESTING_HEART_RATE: HealthDataUnit.BEATS_PER_MINUTE,
+  HealthDataType.WALKING_HEART_RATE: HealthDataUnit.BEATS_PER_MINUTE,
   HealthDataType.HIGH_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT,
   HealthDataType.LOW_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT,
-  HealthDataType.IRREGULAR_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT
+  HealthDataType.IRREGULAR_HEART_RATE_EVENT: HealthDataUnit.NO_UNIT,
+  HealthDataType.HRV_SDNN_HEART_RATE_EVENT: HealthDataUnit.MILLISECONDS,
+  // Hearing
+  // HealthDataType.ENV_AUDIO_EXPOSURE: HealthDataUnit.NO_UNIT,
+  // HealthDataType.HEADPHONE_AUDIO_EXPOSURE: HealthDataUnit.NO_UNIT,
+  // Lab and Test Results
+  HealthDataType.ELECTRODERMAL_ACTIVITY: HealthDataUnit.SIEMENS,
 };
 
 /// List of data types available on iOS
 const List<HealthDataType> _dataTypesIOS = [
-  HealthDataType.BODY_FAT_PERCENTAGE,
+  // Body Measurements
   HealthDataType.HEIGHT,
   HealthDataType.WEIGHT,
   HealthDataType.BODY_MASS_INDEX,
+  HealthDataType.BODY_FAT_PERCENTAGE,
   HealthDataType.WAIST_CIRCUMFERENCE,
+  // Activity
   HealthDataType.STEPS,
   HealthDataType.BASAL_ENERGY_BURNED,
   HealthDataType.ACTIVE_ENERGY_BURNED,
-  HealthDataType.HEART_RATE,
   HealthDataType.BODY_TEMPERATURE,
+  // Blood
   HealthDataType.BLOOD_PRESSURE_SYSTOLIC,
   HealthDataType.BLOOD_PRESSURE_DIASTOLIC,
-  HealthDataType.RESTING_HEART_RATE,
-  HealthDataType.WALKING_HEART_RATE,
   HealthDataType.BLOOD_OXYGEN,
   HealthDataType.BLOOD_GLUCOSE,
-  HealthDataType.ELECTRODERMAL_ACTIVITY,
+  // HealthDataType.BLOOD_PRESSURE,
+  HealthDataType.BLOOD_ALCOHOL,
+  // Respiratory
+  HealthDataType.RESPIRATORY_RATE,
+  HealthDataType.VO2MAX,
+  // Heart Rates
+  HealthDataType.HEART_RATE,
+  HealthDataType.RESTING_HEART_RATE,
+  HealthDataType.WALKING_HEART_RATE,
+  HealthDataType.HRV_SDNN_HEART_RATE_EVENT,
   HealthDataType.HIGH_HEART_RATE_EVENT,
   HealthDataType.LOW_HEART_RATE_EVENT,
-  HealthDataType.IRREGULAR_HEART_RATE_EVENT
+  HealthDataType.IRREGULAR_HEART_RATE_EVENT,
+  // Hearing
+  // HealthDataType.ENV_AUDIO_EXPOSURE,
+  // HealthDataType.HEADPHONE_AUDIO_EXPOSURE,
+  // Lab and Test Results
+  HealthDataType.ELECTRODERMAL_ACTIVITY,
 ];
 
 /// List of data types available on Android
