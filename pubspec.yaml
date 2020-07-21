@@ -1,6 +1,6 @@
 name: healthhub
 description: Wrapper for the iOS HealthKit and Android GoogleFit services.
-version: 1.0.4
+version: 1.0.5
 author: Codustry <hello@codustry.com>
 homepage: https://github.com/codustry/healthhub
 
