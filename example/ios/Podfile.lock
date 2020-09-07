@@ -1,22 +1,22 @@
 PODS:
   - Flutter (1.0.0)
-  - health (1.0.1):
+  - healthhub (1.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - health (from `.symlinks/plugins/health/ios`)
+  - healthhub (from `.symlinks/plugins/healthhub/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  health:
-    :path: ".symlinks/plugins/health/ios"
+  healthhub:
+    :path: ".symlinks/plugins/healthhub/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  health: 44840ad4328aa5586e77bef289898bfed644a81c
+  healthhub: 71b448ae0851894a55d9b023ae6b6fd77668551c
 
-PODFILE CHECKSUM: 083258d7f5e80b42ea9bfee905fe93049bc04c64
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
 COCOAPODS: 1.9.0
